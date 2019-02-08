@@ -33,7 +33,7 @@ class Target_Stripper {
  }
  $target_stripper = new Target_Stripper(); 
 
-//strips '<br />', '<br/>', '<BR/>', '<br>', '<br >', '<p>&nbsp;</p>', '<h4>', '</h4>', '<h5>', '</h5>', '<h6>', '</h6>', '<h1>', '</h1>', '<b>', '</b>', '&nbsp;'
+//strips '<br />', '<br/>', '<BR/>', '<br>', '<br >', '<p>&nbsp;</p>', '<b>', '</b>', '&nbsp;'
 class brake_Stripper {
  	function __construct() {
  	    add_action( 'add_meta_boxes' , array( $this, 'show_filtered_content' ) , 1 , 2 );
@@ -42,7 +42,7 @@ class brake_Stripper {
  	
      function clean_content( $content ) {
  		// Search $content for target="" and rel="" and remove
- 		$patterns = array('<br />', '<br/>', '<BR/>', '<br>', '<br >', '<p>&nbsp;</p>', '<h4>', '</h4>', '<h5>', '</h5>', '<h6>', '</h6>', '<h1>', '</h1>', '<b>', '</b>', '&nbsp;');
+ 		$patterns = array('<br />', '<br/>', '<BR/>', '<br>', '<br >', '<p>&nbsp;</p>', '<b>', '</b>', '&nbsp;');
  		$content = str_replace($patterns, ' ' , $content );
  		
  		return apply_filters( 'brake_stripper_strip_rel' , $content );
