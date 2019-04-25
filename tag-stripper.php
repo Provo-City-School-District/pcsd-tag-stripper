@@ -4,7 +4,7 @@ Plugin Name: PCSD Tag Stripper
 Plugin URI: 
 Description: Removes common deprecated and problmatic tags and attributes that the wordpress editor will add automatically. Original Code pulled and from a plugin ericjuden had written. modified by Josh Espinoza
 Author: Josh Espinoza, ericjuden
-Version: 1.5
+Version: 1.6
 Author URI:
 */
 class Target_Stripper {
@@ -14,7 +14,7 @@ class Target_Stripper {
  	}
      function clean_content( $content ) {
  		// Search $content for target="" and rel="" and remove
- 		$patterns = array( '/(<[^>]+) target=".*?"/i' , "/(<[^>]+) target='.*?'/i",'/(<[^>]+) rel=".*?"/i' , "/(<[^>]+) rel='.*?'/i" );
+ 		$patterns = array( '/(<[^>]+) target=".*?"/i' , "/(<[^>]+) target='.*?'/i",'/(<[^>]+) rel=".*?"/i' , "/(<[^>]+) rel='.*?'/i", '/(<[^>]+) href="mailto:.*?"/i', '#<iframe[^>]+>.*?</iframe>#is' );
  		$content = preg_replace( $patterns , '$1' , $content );	
  		return apply_filters( 'target_stripper_strip_rel' , $content );
  	}
@@ -35,7 +35,7 @@ class brake_Stripper {
  	}
      function clean_content( $content ) {
  		// Search $content for target="" and rel="" and remove
- 		$patterns = array('<br />', '<br/>', '<BR/>', '<br>', '<br >', '<p>&nbsp;</p>', '<b>', '</b>', '&nbsp;', '<h1></h1>', '<h1> </h1>', '<h2></h2>', '<h2> </h2>', '<h3></h3>', '<h3> </h3>', '<h4></h4>', '<h4> </h4>', '<h5>', '</h5>', '<h6>', '</h6>');
+ 		$patterns = array('<br />', '<br/>', '<BR/>', '<br>', '<br >', '<p>&nbsp;</p>', '<b>', '</b>', '&nbsp;', '<h1></h1>', '<h1> </h1>', '<h2></h2>', '<h2> </h2>', '<h3></h3>', '<h3> </h3>', '<h4></h4>', '<h4> </h4>', '<h5>', '</h5>', '<h6>', '</h6>', '<a>', '<iframe>', '</iframe>');
  		$content = str_replace($patterns, ' ' , $content );
  		
  		return apply_filters( 'brake_stripper_strip_rel' , $content );
